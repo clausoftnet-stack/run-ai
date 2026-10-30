@@ -2,14 +2,18 @@
 services:
   api:
     build: ./api
-    env_file: .env
+    env_file:
+      - path: .env
+        required: false
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
       interval: 30s
   web:
     build: ./web
-    env_file: .env
+    env_file:
+      - path: .env
+        required: false
     environment:
       API_URL: http://api:8000
     ports:
