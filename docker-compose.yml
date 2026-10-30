@@ -1,0 +1,19 @@
+# Lo usa Dokploy (tipo Compose) y sirve igual en local: docker compose up --build
+services:
+  api:
+    build: ./api
+    env_file: .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+  web:
+    build: ./web
+    env_file: .env
+    environment:
+      API_URL: http://api:8000
+    ports:
+      - "4321:4321"
+    depends_on:
+      - api
+    restart: unless-stopped

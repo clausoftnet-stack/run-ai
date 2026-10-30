@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+.astro/
+.venv/
+__pycache__/
+.pytest_cache/
+supabase/.temp/
+supabase/.branches/
