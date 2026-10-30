@@ -145,3 +145,25 @@ Si se atasca, merece más la pena ir directo a una VPS de 5 €/mes, porque adem
 `pytest` (dominio, api y CLI) · tests del front · Playwright móvil y kiosko · importación cuadrada
 contra los `.md` · una semana entera (`/semana` → elegir en el móvil → `/compra` → `/revision`) sobre
 el Supabase local.
+
+---
+
+## Progreso (lo actualiza Claude al cerrar cada trozo)
+
+| Fase | Estado | Commit | Notas |
+|---|---|---|---|
+| 1. Esqueleto | ✅ hecha | 534830d | api FastAPI + web Astro 7 (SSR, React, adapter node) + compose. Node >= 22.23.4 |
+| 2. Esquema + migraciones | ✅ hecha | 499c331 | 13 tablas, RLS sin políticas (solo la api con secret key), `elegir_opcion`, índice de una (E) por comida |
+| 3. Migración de datos | ✅ hecha | 632f945 | `scripts/importar.py`, verificado contra el parser de app.js. Cargado en local y en la nube (30/10/2026) |
+| 4. Dominio + CLI + api | ⏳ siguiente | | trozos: 1 consultas · 2 CLI agentes · 3 sync Garmin + Storage + worker · 4 plan comidas · 5 revisión · 6 api web |
+| 5. Frontend | pendiente | | parar a enseñar la pantalla de resumen antes de seguir |
+| 6. Agentes + semana real | pendiente | | la valida Álvaro usando una semana real |
+| 7. Despliegue Dokploy | pendiente | | |
+
+**Nube (Supabase `run-ai`, eu-west-1):** esquema y config de Auth subidos; datos importados el 30/10/2026.
+Hay que **reimportar** (`importar.py` con `DATABASE_URL`) al dar el cambio definitivo.
+
+**Pendientes de Álvaro:** crear `.claude/settings.json` (permisos para trabajar sin aprobaciones;
+el contenido está preparado) · hacer privado el repo de GitHub.
+
+**Siguiente paso concreto:** fase 4, trozo 1 — portar `query.py` a `api/runai/consultas.py` con sus tests.
