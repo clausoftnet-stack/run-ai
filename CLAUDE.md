@@ -10,6 +10,8 @@ El proyecto viejo solo se lee: no se edita desde aquí.
 - `web/` Astro (SSR, adapter node) + React. Requiere Node >= 22.23.4.
 - `supabase/` config y migraciones. BD local: `npx supabase start` (necesita Docker Desktop).
 - `docker-compose.yml`: el mismo fichero para local y para Dokploy.
+- `scripts/importar.py --origen C:/Proyectos/IA/run-ai`: migración de los ficheros viejos a la
+  BD (recarga completa y se verifica contra el parser de `app/app.js`).
 
 ## Reglas
 - Secretos solo en `.env` (no va a git). Nunca en el chat ni en el código.

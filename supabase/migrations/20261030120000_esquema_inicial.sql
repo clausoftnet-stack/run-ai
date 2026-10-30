@@ -146,8 +146,10 @@ create unique index opcion_una_elegida on opcion (comida_id) where elegida;
 -- ---------------------------------------------------------------- compra
 create table compra (
   semana        text primary key references plan_semana on delete cascade,
-  cabecera_md   text not null default '',
-  almacen       text,
+  -- el documento entero (avisos de despensa, lo que no se elige...); los items
+  -- de abajo son solo las filas de las tablas, para la checklist del móvil
+  md            text not null default '',
+  total_eur     numeric(7,2),
   generado      timestamptz not null default now()
 );
 
